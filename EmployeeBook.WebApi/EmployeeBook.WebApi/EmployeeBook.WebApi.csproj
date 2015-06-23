@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="DAL\EmployeeContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -109,6 +110,10 @@
     <Compile Include="Migrations\201506181438345_CvDocuments1.cs" />
     <Compile Include="Migrations\201506181438345_CvDocuments1.Designer.cs">
       <DependentUpon>201506181438345_CvDocuments1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506231219407_AddDocumentColumn.cs" />
+    <Compile Include="Migrations\201506231219407_AddDocumentColumn.Designer.cs">
+      <DependentUpon>201506231219407_AddDocumentColumn.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CvDocument.cs" />
@@ -136,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506181438345_CvDocuments1.resx">
       <DependentUpon>201506181438345_CvDocuments1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506231219407_AddDocumentColumn.resx">
+      <DependentUpon>201506231219407_AddDocumentColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

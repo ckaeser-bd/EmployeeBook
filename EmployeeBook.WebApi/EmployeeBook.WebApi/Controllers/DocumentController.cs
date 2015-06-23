@@ -12,45 +12,42 @@ using EmployeeBook.WebApi.Models;
 namespace EmployeeBook.WebApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class EmployeeController : ApiController
+    public class DocumentController : ApiController
     {
         private readonly EmployeeContext _db = new EmployeeContext();
 
-        // GET: api/Employee
-        public IQueryable<Employee> GetEmployees()
+        public IQueryable<CvDocument> GetDocuments()
         {
-            return _db.Employees;
+            return _db.CvDocuments;
         }
 
-        // GET: api/Employee/5
-        [ResponseType(typeof(Employee))]
-        public async Task<IHttpActionResult> GetEmployee(int id)
+        [ResponseType(typeof(CvDocument))]
+        public async Task<IHttpActionResult> GetCvDocument(int id)
         {
-            var employee = await _db.Employees.Include(e => e.CvDocuments).SingleOrDefaultAsync(e => e.Id == id);
+            var document = await _db.CvDocuments.FindAsync(id);
 
-            if (employee == null)
+            if (document == null)
             {
                 return NotFound();
             }
 
-            return Ok(employee);
+            return Ok(document);
         }
 
-        // PUT: api/Employee/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutEmployee(int id, Employee employee)
+        public async Task<IHttpActionResult> PutDocument(int id, CvDocument document)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != employee.Id)
+            if (id != document.Id)
             {
                 return BadRequest();
             }
 
-            _db.Entry(employee).State = EntityState.Modified;
+            _db.Entry(document).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +55,7 @@ namespace EmployeeBook.WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeExists(id))
+                if (!DocumentExists(id))
                 {
                     return NotFound();
                 }
@@ -68,35 +65,33 @@ namespace EmployeeBook.WebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Employee
-        [ResponseType(typeof(Employee))]
-        public async Task<IHttpActionResult> PostEmployee(Employee employee)
+        [ResponseType(typeof(CvDocument))]
+        public async Task<IHttpActionResult> PostDocument(CvDocument document)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _db.Employees.Add(employee);
+            _db.CvDocuments.Add(document);
             await _db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = employee.Id }, employee);
+            return CreatedAtRoute("DefaultApi", new { id = document.Id }, document);
         }
 
-        // DELETE: api/Employee/5
         [ResponseType(typeof(Employee))]
-        public async Task<IHttpActionResult> DeleteEmployee(int id)
+        public async Task<IHttpActionResult> DeleteDocument(int id)
         {
-            var employee = await _db.Employees.FindAsync(id);
-            if (employee == null)
+            var document = await _db.CvDocuments.FindAsync(id);
+            if (document == null)
             {
                 return NotFound();
             }
 
-            _db.Employees.Remove(employee);
+            _db.CvDocuments.Remove(document);
             await _db.SaveChangesAsync();
 
-            return Ok(employee);
+            return Ok(document);
         }
 
         protected override void Dispose(bool disposing)
@@ -108,9 +103,9 @@ namespace EmployeeBook.WebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool EmployeeExists(int id)
+        private bool DocumentExists(int id)
         {
-            return _db.Employees.Count(e => e.Id == id) > 0;
+            return _db.CvDocuments.Count(d => d.Id == id) > 0;
         }
     }
 }

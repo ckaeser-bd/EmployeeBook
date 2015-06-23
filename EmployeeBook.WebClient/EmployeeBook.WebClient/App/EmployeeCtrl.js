@@ -35,8 +35,7 @@ myApp.controller('EmployeeCtrl', function($scope, $http) {
             $scope.errorMessage = "Couldn't load the list of employees, error # " + status;
         });
 
-    $scope.selectEmployee = function(val) {
-        //  If the user clicks on a <div>, we can get the ng-click to call this function, to set a new selected Employee.
+    $scope.selectEmployee = function (val) {
         $scope.selectedEmployee = val.Id;
         $scope.loadDetails();
     }
@@ -44,10 +43,9 @@ myApp.controller('EmployeeCtrl', function($scope, $http) {
     $scope.loadDetails = function() {
         //  Reset our list 
         $scope.listOfDetails = null;
+        //$scope.listOfDocuments = null;
 
-        //  The user has selected an employee
         $http.get(serviceUrl + $scope.selectedEmployee)
-            //$http.get('http://employeewebapi.azurewebsites.net/api/employee/' + $scope.selectedEmployee)
             .success(function(data) {
                 $scope.listOfDetails = data;
             })
@@ -75,5 +73,20 @@ myApp.controller('EmployeeCtrl', function($scope, $http) {
             .success(function (data, status) {
                 alert(data + " " + status);
             });
+    }
+
+    $scope.alertJo = function() {
+        alert("jo");
+    }
+
+    $scope.addDocument = function () {
+        var f = document.getElementById('file').files[0],
+            r = new FileReader();
+        r.onloadend = function (e) {
+            var data = e.target.result;
+            //send you binary data via $http or $resource or do anything else with it
+        }
+        r.readAsBinaryString(f);
+        r.readAsArrayBuffer(f);
     }
 });
