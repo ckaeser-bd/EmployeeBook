@@ -58,18 +58,21 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\EmployeeCtrl.js" />
-    <Content Include="App\views\PersonalData.html" />
+    <Content Include="App\app.js" />
+    <Content Include="App\education\education.html" />
+    <Content Include="App\education\education.js" />
+    <Content Include="App\employee\employee.html" />
+    <Content Include="App\employee\employee.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\app.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="favIcon.ico" />
     <Content Include="Icon.png" />
     <Content Include="images\personIcon.jpg" />
     <Content Include="Index.html" />
-    <Content Include="css\MasterDetailStyles.css" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -879,9 +882,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App\controllers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
