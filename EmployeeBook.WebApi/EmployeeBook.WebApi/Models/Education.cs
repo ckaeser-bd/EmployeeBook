@@ -1,12 +1,14 @@
-﻿using System.IO;
+﻿using System;
 
 namespace EmployeeBook.WebApi.Models
 {
-    public class CvDocument
+    public class Education
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public byte[] Document { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+
         public int EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
     }

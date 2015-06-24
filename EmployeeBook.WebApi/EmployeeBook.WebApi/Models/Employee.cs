@@ -6,12 +6,12 @@ namespace EmployeeBook.WebApi.Models
     {
         public Employee ()
         {
-            CvDocuments = new HashSet<CvDocument>();
+            Educations = new HashSet<Education>();
         }
         public int Id { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
 
-        public ICollection<CvDocument> CvDocuments { get; set; }
+        public ICollection<Education> Educations { get; set; }
     }
 }

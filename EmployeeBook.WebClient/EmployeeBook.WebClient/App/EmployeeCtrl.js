@@ -1,5 +1,6 @@
 ﻿var myApp = angular.module('myApp', []);
 var serviceUrl = 'http://localhost:8099/api/employee/';
+var serviceUrlDocuments = 'http://localhost:8099/api/document/';
 //var serviceUrl = 'http://employeewebapi.azurewebsites.net/api/employee/';
 
 //  Force AngularJS to call our JSON Web Service with a 'GET' rather than an 'OPTION' 
@@ -43,7 +44,6 @@ myApp.controller('EmployeeCtrl', function($scope, $http) {
     $scope.loadDetails = function() {
         //  Reset our list 
         $scope.listOfDetails = null;
-        //$scope.listOfDocuments = null;
 
         $http.get(serviceUrl + $scope.selectedEmployee)
             .success(function(data) {
@@ -80,13 +80,21 @@ myApp.controller('EmployeeCtrl', function($scope, $http) {
     }
 
     $scope.addDocument = function () {
+        alert("jo");
+
         var f = document.getElementById('file').files[0],
             r = new FileReader();
         r.onloadend = function (e) {
             var data = e.target.result;
             //send you binary data via $http or $resource or do anything else with it
+            $scope.sendPut = function () {
+                $http.put(serviceUrlDocuments + '1', data)
+                    .success(function (data, status) {
+                        alert(data + " " + status);
+                    });
+            }
         }
-        r.readAsBinaryString(f);
+        //r.readAsBinaryString(f);
         r.readAsArrayBuffer(f);
     }
 });

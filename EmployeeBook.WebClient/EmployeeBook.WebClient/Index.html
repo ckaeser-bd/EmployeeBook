@@ -5,7 +5,6 @@
         <link href="/Content/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="/css/MasterDetailStyles.css" rel="stylesheet" media="screen">
         <script src="/Scripts/angular.js"></script>
-        <script src="/App/3dParty/angular-file-upload.js"></script>
         <script src="/App/EmployeeCtrl.js"></script>
     </head>
     <body>
@@ -23,6 +22,8 @@
                 <!-- Details of Employee -->
                 <div id="Detail_{{Detail.EmployeeID}}" class="cssOneOrderRecord">
                     <div>
+                        <label class="h2">Personalien:</label>
+
                         <table>                           
                             <tr>
                                 <td>Lastname: </td>
@@ -33,18 +34,16 @@
                                 <td><input ng-model="listOfDetails.FirstName" /></td>
                             </tr>
                             <tr></tr>
-                            <tr ng-repeat='Document in listOfDetails.CvDocuments'>
-                                <td>
-                                    DocName:
-                                </td>
-                                <td>{{Document.Name}}</td>
-                                <td><button>Show</button></td>
-                                <td><button>Delete</button></td>
-                            </tr>
-                            <tr><td><input type="file" id="file" name="file" />
-                                    <button ng-click="addDocument()">Add Doc.</button>
-                                </td></tr>
                         </table>
+                    </div>
+                    <div> <!--Ausbildung-->
+                        <label class="h2">Ausbildung:</label>
+                        <div ng-repeat='education in listOfDetails.Educations'>
+                            {{education.Start | date:"dd.MM.yyyy"}} - {{education.End| date:"dd.MM.yyyy"}}: {{education.Name}}
+                        </div>
+                        <div ng-repeat='education in listOfDetails.Educations'>
+                            <input type="date" value="{{education.Start | date:'dd.MM.yyyy'}}" /> - <input type="date" ng-model="education.End" />: <input ng-model="education.Name" />
+                        </div>
                     </div>
                 </div>
                 

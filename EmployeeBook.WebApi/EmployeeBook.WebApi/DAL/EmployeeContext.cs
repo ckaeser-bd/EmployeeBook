@@ -11,7 +11,7 @@ namespace EmployeeBook.WebApi.DAL
         }
 
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<CvDocument> CvDocuments { get; set; }
+        public DbSet<Education> Educations { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

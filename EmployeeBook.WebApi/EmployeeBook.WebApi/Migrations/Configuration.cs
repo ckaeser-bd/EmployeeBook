@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace EmployeeBook.WebApi.Migrations
             context.SaveChanges();
 
             var employee = employees.FirstOrDefault();
-            if (employee != null) employee.CvDocuments.Add(new CvDocument{Name = "TestDok.docx"});
+            if (employee != null) employee.Educations.Add(new Education{Name = "Test", Start = DateTime.Today.AddYears(-10), End = DateTime.Today.AddYears(-5)});
 
             context.SaveChanges();
         }

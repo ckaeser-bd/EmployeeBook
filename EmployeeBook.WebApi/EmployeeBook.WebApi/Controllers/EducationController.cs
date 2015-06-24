@@ -12,42 +12,42 @@ using EmployeeBook.WebApi.Models;
 namespace EmployeeBook.WebApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class DocumentController : ApiController
+    public class EducationController : ApiController
     {
         private readonly EmployeeContext _db = new EmployeeContext();
 
-        public IQueryable<CvDocument> GetDocuments()
+        public IQueryable<Education> GetEducations()
         {
-            return _db.CvDocuments;
+            return _db.Educations;
         }
 
-        [ResponseType(typeof(CvDocument))]
-        public async Task<IHttpActionResult> GetCvDocument(int id)
+        [ResponseType(typeof(Education))]
+        public async Task<IHttpActionResult> GetEducation(int id)
         {
-            var document = await _db.CvDocuments.FindAsync(id);
+            var education = await _db.Educations.FindAsync(id);
 
-            if (document == null)
+            if (education == null)
             {
                 return NotFound();
             }
 
-            return Ok(document);
+            return Ok(education);
         }
 
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutDocument(int id, CvDocument document)
+        public async Task<IHttpActionResult> PutEducation(int id, Education education)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != document.Id)
+            if (id != education.Id)
             {
                 return BadRequest();
             }
 
-            _db.Entry(document).State = EntityState.Modified;
+            _db.Entry(education).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +55,7 @@ namespace EmployeeBook.WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DocumentExists(id))
+                if (!EducationExists(id))
                 {
                     return NotFound();
                 }
@@ -65,33 +65,33 @@ namespace EmployeeBook.WebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [ResponseType(typeof(CvDocument))]
-        public async Task<IHttpActionResult> PostDocument(CvDocument document)
+        [ResponseType(typeof(Education))]
+        public async Task<IHttpActionResult> PostEducation(Education education)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _db.CvDocuments.Add(document);
+            _db.Educations.Add(education);
             await _db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = document.Id }, document);
+            return CreatedAtRoute("DefaultApi", new { id = education.Id }, education);
         }
 
-        [ResponseType(typeof(Employee))]
-        public async Task<IHttpActionResult> DeleteDocument(int id)
+        [ResponseType(typeof(Education))]
+        public async Task<IHttpActionResult> DeleteEducation(int id)
         {
-            var document = await _db.CvDocuments.FindAsync(id);
-            if (document == null)
+            var education = await _db.Educations.FindAsync(id);
+            if (education == null)
             {
                 return NotFound();
             }
 
-            _db.CvDocuments.Remove(document);
+            _db.Educations.Remove(education);
             await _db.SaveChangesAsync();
 
-            return Ok(document);
+            return Ok(education);
         }
 
         protected override void Dispose(bool disposing)
@@ -103,9 +103,9 @@ namespace EmployeeBook.WebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool DocumentExists(int id)
+        private bool EducationExists(int id)
         {
-            return _db.CvDocuments.Count(d => d.Id == id) > 0;
+            return _db.Educations.Count(d => d.Id == id) > 0;
         }
     }
 }

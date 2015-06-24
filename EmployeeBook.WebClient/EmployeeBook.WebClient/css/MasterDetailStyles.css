@@ -17,7 +17,7 @@
 }
 #divDetailView
 {
-    height: 300px;
+    height: auto;
     background: #EEEEEE; 
     overflow-y: auto;
 }

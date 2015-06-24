@@ -26,7 +26,7 @@ namespace EmployeeBook.WebApi.Controllers
         [ResponseType(typeof(Employee))]
         public async Task<IHttpActionResult> GetEmployee(int id)
         {
-            var employee = await _db.Employees.Include(e => e.CvDocuments).SingleOrDefaultAsync(e => e.Id == id);
+            var employee = await _db.Employees.Include(e => e.Educations).SingleOrDefaultAsync(e => e.Id == id);
 
             if (employee == null)
             {
