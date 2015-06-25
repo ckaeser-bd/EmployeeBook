@@ -1,57 +1,54 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="employeeApp">
 <head>
     <title>EmployeeBook</title>
     <link href="/Content/bootstrap.min.css" rel="stylesheet" media="screen">
     <script src="/Scripts/angular.js"></script>
 </head>
-    <body>
-        <div>this is the employee site</div>
-        <div id="divMasterDetailWrapper" ng-controller='EmployeeCtrl'>
+<body>
+    <div>this is the employee site</div>
+    <div id="divMasterDetailWrapper" ng-controller='EmployeeCtrl'>
 
-            <!-- First, we have our left-hand filterable list of Employee records -->
-            <div id="divMasterView">
-                <label>Search: <input ng-model="searchText" autofocus></label>
-                <div id="{{Employee.EmployeeId}}" class="cssOneRecord" ng-class="{selectedRecord: Employee.Id == selectedEmployee}" ng-repeat='Employee in listOfEmployees | filter:searchText | orderBy:"LastName"' ng-click="selectEmployee(Employee);">
-                    <div>{{Employee.FirstName}} {{Employee.LastName}}</div>
-                </div>
+        <!-- First, we have our left-hand filterable list of Employee records -->
+        <div id="divMasterView">
+            <label>Search: <input ng-model="searchText" autofocus></label>
+            <div id="{{Employee.EmployeeId}}" class="cssOneRecord" ng-class="{selectedRecord: Employee.Id == selectedEmployee}" ng-repeat='Employee in listOfEmployees | filter:searchText | orderBy:"LastName"' ng-click="selectEmployee(Employee);">
+                <div>{{Employee.FirstName}} {{Employee.LastName}}</div>
             </div>
-            <!-- Then, we have our right-hand panel, showing one Employee's details -->
-            <div id="divDetailView">
-                <!-- Details of Employee -->
-                <div id="Detail_{{Detail.EmployeeID}}" class="cssOneOrderRecord">
-                    <div>
-                        <label class="h2">Personalien:</label>
-
-                        <table>
-                            <tr>
-                                <td>Lastname: </td>
-                                <td><input ng-model="listOfDetails.LastName" /></td>
-                            </tr>
-                            <tr>
-                                <td>Firstname: </td>
-                                <td><input ng-model="listOfDetails.FirstName" /></td>
-                            </tr>
-                            <tr></tr>
-                        </table>
-                    </div>
-                    <div>
-                        <!--Ausbildung-->
-                        <label class="h2">Ausbildung:</label>
-                        <div ng-repeat='education in listOfDetails.Educations'>
-                            {{education.Start | date:"dd.MM.yyyy"}} - {{education.End| date:"dd.MM.yyyy"}}: {{education.Name}}
-                        </div>
-                        <!--<div ng-repeat='education in listOfDetails.Educations'>
-                                <input type="date" /> - <input type="date" ng-model="education.End" />: <input ng-model="education.Name" />
-                            </div>-->
-                    </div>
-                </div>
-
-
-                <button id="saveButton" ng-click="sendPut()" type="submit">Save</button>
-                <button id="addButton" ng-click="sendPost()" type="submit">Add</button>
-                <button id="deleteButton" ng-click="sendDelete()" type="submit">Delete</button>
-            </div>
+            <button ng-click="insertEmployee()">Add Employee</button>
         </div>
-    </body>
+        <!-- Then, we have our right-hand panel, showing one Employee's details -->
+        <div id="divDetailView">
+            <!-- Details of Employee -->
+            <div id="Detail_{{Detail.EmployeeID}}" class="cssOneOrderRecord">
+                <div>
+                    <label class="h2">Personalien:</label>
+
+                    <table>
+                        <tr>
+                            <td>Lastname: </td>
+                            <td><input ng-model="listOfDetails.LastName" /></td>
+                        </tr>
+                        <tr>
+                            <td>Firstname: </td>
+                            <td><input ng-model="listOfDetails.FirstName" /></td>
+                        </tr>
+                        <tr></tr>
+                    </table>
+                </div>
+                <div>
+                    <!--Ausbildung-->
+                    <label class="h2">Ausbildung:</label>
+                    <div ng-repeat='education in listOfDetails.Educations'>
+                        {{education.Start | date:"dd.MM.yyyy"}} - {{education.End| date:"dd.MM.yyyy"}}: {{education.Name}}
+                    </div>
+                </div>
+            </div>
+
+
+            <button id="saveButton" ng-click="updateEmployee()" type="submit">Save</button>
+            <button id="deleteButton" ng-click="deleteEmployee()" type="submit">Delete</button>
+        </div>
+    </div>
+</body>
 </html>

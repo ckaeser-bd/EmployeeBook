@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('myApp.education', ['ngRoute'])
+angular.module('employeeApp.education', ['ngRoute'])
 
 .config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/education', {

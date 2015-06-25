@@ -1,79 +1,44 @@
 ﻿'use strict';
 
-angular.module('myApp.employee', ['ngRoute'])
+employee
+    .config([
+        '$routeProvider', function($routeProvider) {
+            $routeProvider.when('/App/employee', {
+                templateUrl: '/App/employee/employee.html',
+                controller: 'EmployeeCtrl'
+            });
+        }
+    ])
+    .controller('EmployeeCtrl', function($scope, $http, employeeService) {
+            //  here we'll load our list of employees from our JSON Web Service 
+            $scope.listOfEmployees = [];
+            //  When the user selects an "Employee" from our MasterView list, we'll set the following variable.
+            $scope.selectedEmployee = [];
 
-.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/App/employee', {
-        templateUrl: '/App/employee/employee.html',
-        controller: 'EmployeeCtrl'
-    });
-}])
+            employeeService.getEmployees().success(function(data) {
+                $scope.listOfEmployees = data;
+            });
 
-
-.controller('EmployeeCtrl', function($scope, $http) {
-    //  here we'll load our list of employees from our JSON Web Service 
-    $scope.listOfEmployees = null;
-
-    //  When the user selects an "Employee" from our MasterView list, we'll set the following variable.
-    $scope.selectedEmployee = null;
-
-    $http.get(serviceUrl)
-        .success(function (data) {
-            $scope.listOfEmployees = data;
-
-            if ($scope.listOfEmployees.length > 0) {
-
-                //  If we managed to load more than one Employee record, then select the first record by default.
-                //  This line of code also prevents AngularJS from adding a "blank" <option> record in our drop down list
-                $scope.selectedEmployee = $scope.listOfEmployees[0].Id;
-                //  Load the Details
-                $scope.loadDetails();
+            $scope.selectEmployee = function(val) {
+                $scope.listOfDetails = [];
+                $scope.selectedEmployee = val.Id;
+                employeeService.getEmployee(val.Id).success(function(data) {
+                    $scope.listOfDetails = data;
+                });
             }
-        })
-        .error(function (data, status, headers, config) {
-            $scope.errorMessage = "Couldn't load the list of employees, error # " + status;
-        });
 
-    $scope.selectEmployee = function (val) {
-        $scope.selectedEmployee = val.Id;
-        $scope.loadDetails();
-    }
+            $scope.updateEmployee = function () {
+                console.log("update employee");
+                employeeService.updateEmployee($scope.listOfDetails);
+            }
 
-    $scope.loadDetails = function () {
-        //  Reset our list 
-        $scope.listOfDetails = null;
+            $scope.deleteEmployee = function () {
+                console.log("delete employee");
+                employeeService.deleteEmployee($scope.selectedEmployee);
+            }
 
-        $http.get(serviceUrl + $scope.selectedEmployee)
-            .success(function (data) {
-                $scope.listOfDetails = data;
-            })
-            .error(function (data, status, headers, config) {
-                $scope.errorMessage = "Couldn't load the list of Details, error # " + status;
-            });
-    }
-
-    $scope.sendPut = function () {
-        $http.put(serviceUrl + $scope.selectedEmployee, $scope.listOfDetails)
-            .success(function (data, status) {
-                alert(data + " " + status);
-            });
-    }
-
-    $scope.sendPost = function () {
-        $http.post(serviceUrl, $scope.listOfDetails)
-            .success(function (data, status) {
-                alert(data + " " + status);
-            });
-    }
-
-    $scope.sendDelete = function () {
-        $http.delete(serviceUrl + $scope.selectedEmployee)
-            .success(function (data, status) {
-                alert(data + " " + status);
-            });
-    }
-
-    $scope.alertJo = function () {
-        alert("jo");
-    }
-});
+            $scope.insertEmployee = function () {
+                $scope.listOfDetails = [];
+            }
+        }
+    );
