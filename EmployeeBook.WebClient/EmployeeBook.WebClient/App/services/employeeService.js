@@ -2,7 +2,8 @@
 Rest Web Api 2 Service facade for employees
 */
 employeeApp.service('employeeService', function ($http) {
-    var serviceUrl = 'http://localhost:8099/api/employee';
+    //var serviceUrl = 'http://localhost:8099/api/employee/';
+    var serviceUrl = 'http://employeewebapitest.azurewebsites.net/api/employee/';
 
     this.getEmployees = function () {
         return $http.get(serviceUrl);

@@ -1,9 +1,5 @@
 ﻿'use strict';
 
-var serviceUrl = 'http://localhost:8099/api/employee/';
-//var serviceUrl = 'http://employeewebapi.azurewebsites.net/api/employee/';
-
-
 // Declare app level module which depends on views, and components
 var employeeApp = angular.module('employeeApp', [
     'ngRoute',
@@ -18,4 +14,5 @@ employeeApp.
         }
     ]);
 
+// Declare sub-App-level module
 var employee = angular.module('employeeApp.employee', ['ngRoute']);

@@ -10,14 +10,12 @@ employee
         }
     ])
     .controller('EmployeeCtrl', function($scope, $http, employeeService) {
-            //  here we'll load our list of employees from our JSON Web Service 
-            $scope.listOfEmployees = [];
-            //  When the user selects an "Employee" from our MasterView list, we'll set the following variable.
-            $scope.selectedEmployee = [];
-
-            employeeService.getEmployees().success(function(data) {
-                $scope.listOfEmployees = data;
-            });
+            // region function declarations
+            $scope.getEmployees = function() {
+                employeeService.getEmployees().success(function(data) {
+                    $scope.listOfEmployees = data;
+                });
+            }
 
             $scope.selectEmployee = function(val) {
                 $scope.listOfDetails = [];
@@ -27,18 +25,31 @@ employee
                 });
             }
 
-            $scope.updateEmployee = function () {
+            $scope.updateEmployee = function() {
                 console.log("update employee");
-                employeeService.updateEmployee($scope.listOfDetails);
+                employeeService.updateEmployee($scope.listOfDetails).success($scope.getEmployees());
             }
 
-            $scope.deleteEmployee = function () {
+            $scope.deleteEmployee = function() {
                 console.log("delete employee");
+                $scope.listOfEmployees.splice($scope.listOfEmployees.indexOf($scope.selectedEmployee), 1);
                 employeeService.deleteEmployee($scope.selectedEmployee);
             }
 
-            $scope.insertEmployee = function () {
-                $scope.listOfDetails = [];
+            $scope.insertEmployee = function() {
+                var employee = { "Id": -1, "LastName": "ADD", "FirstName": "PERSON" };
+                $scope.listOfDetails = employee;
+                $scope.listOfEmployees.push(employee);
             }
+            // endregion function declarations
+
+            //Init Stuff
+
+            //here we'll load our list of employees from our JSON Web Service 
+            $scope.listOfEmployees = [];
+            //When the user selects an "Employee" from our MasterView list, we'll set the following variable.
+            $scope.selectedEmployee = [];
+            //initial load of employees
+            $scope.getEmployees();
         }
     );
