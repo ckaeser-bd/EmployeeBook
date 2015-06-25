@@ -114,12 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Properties\PublishProfiles\EmployeeWebApi - FTP %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\EmployeeWebApi - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\EmployeeWebApi - Web Deploy %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\EmployeeWebApi - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\EmployeeWebApi.pubxml" />
-    <None Include="Properties\PublishProfiles\EmployeeWebApiAndDB.pubxml" />
     <None Include="Properties\PublishProfiles\employeeWebApiTest.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
