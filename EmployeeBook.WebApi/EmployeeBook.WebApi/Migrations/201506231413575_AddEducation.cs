@@ -1,6 +1,5 @@
 namespace EmployeeBook.WebApi.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class AddEducation : DbMigration
