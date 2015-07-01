@@ -18,6 +18,12 @@ var findEmployeeById = function(id) {
 // get all Employees on page load!
 $(document).ready(function() {
     GetAllEmployees();
+    //http://weblog.west-wind.com/posts/2014/May/12/Filtering-List-Data-with-a-jQuerysearchFilter-Plugin
+    $.expr[":"].containsNoCase = function (el, i, m) {
+        var search = m[3];
+        if (!search) return false;
+        return new RegExp(search, "i").test($(el).text());
+    };
 });
 
 // function definition
@@ -160,3 +166,17 @@ $('#employeeList').on('click', 'table tr', function () {
 });
 
 // end styling
+
+
+
+//filter
+$("#searchEmployees").keyup(function () {
+    var search = $(this).val();
+    $(".employeeTable").show();
+    if (search) {
+        $(".employeeTable").not(":containsNoCase(" + search + ")").hide();
+    }
+});
+
+
+//end filter
