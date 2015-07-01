@@ -1,5 +1,4 @@
-﻿@using EmployeeBook.WebClientRazorAndJQuery.Helpers
-@{
+﻿@{
     ViewBag.Title = "Employees";
 }
 
@@ -15,14 +14,18 @@
 </div>
 
 <div class="col-xs-12 col-sm-4">
-    <label>Firstname</label>
-    <input id="firstName" />
-
-    <label>Lastname</label>
-    <input id="lastName" />
-    
-    <button id="saveEmployee">Save</button>
-    <button id="deleteEmployee">Delete</button>
+    <div>
+        <label>Firstname</label>
+        <input id="firstName" />
+    </div>
+    <div>
+        <label>Lastname</label>
+        <input id="lastName" />
+    </div>
+    <div>
+        <button id="saveEmployee">Save</button>
+        <button id="deleteEmployee">Delete</button>
+    </div>
 </div>
 
 <div class="clearfix"></div>
@@ -82,7 +85,7 @@
             url: webApiUri + id,
             type: 'DELETE',
             contentType: "application/json;charset=utf-8",
-            success: function(data) {
+            success: function() {
                 GetAllEmployees();
                 selectedEmployee = null;
                 $("#firstName").val("");
@@ -146,7 +149,7 @@
                 data: JSON.stringify(dataJson),
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
-                success: function (response) {
+                success: function () {
                     GetAllEmployees();
                 }
             });
@@ -160,7 +163,7 @@
                 data: JSON.stringify(dataJson),
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
-                success: function (response) {
+                success: function () {
                     GetAllEmployees();
                 }
             });
