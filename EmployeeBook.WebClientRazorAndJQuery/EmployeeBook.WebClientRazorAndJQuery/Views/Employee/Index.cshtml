@@ -7,13 +7,14 @@
 </div>
 
 <div class="row col-xs-12">
-    <button id="addEmployee" onclick=" addEmployee(); ">Add</button>
+    <button id="addEmployee" onclick=" addEmployee();">Add</button>
 </div>
 <div class="col-xs-12 col-sm-4">
     <div id="employeeList"></div>
 </div>
 
 <div class="col-xs-12 col-sm-4">
+    <label class="h2">Personalien:</label>
     <div>
         <label>Firstname</label>
         <input id="firstName" />
@@ -27,9 +28,15 @@
         <button id="deleteEmployee">Delete</button>
     </div>
 </div>
+<div class="row col-xs-12 col-sm-4">
+    <label class="h2">Ausbildung:</label>
+    <div id="educationList"></div>
+</div>
 
 <div class="clearfix"></div>
 <script src="//code.jquery.com/jquery.min.js" type="text/javascript"></script>
+<script src="~/Scripts/moment.js"></script>
+<script src="~/Scripts/moment-with-locales.min.js"></script>
 <script src="~/js/Employee/employee.js" type="text/javascript"></script>
 
 
